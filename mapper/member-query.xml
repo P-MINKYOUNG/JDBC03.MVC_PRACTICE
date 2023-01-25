@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	
+<entry key="selectAllMember">
+		SELECT
+		       MEMBER_NO
+		     , MEMBER_ID
+		     , MEMBER_PWD
+		     , MEMBER_NAME
+		     , GENDER
+		     , EMAIL
+		     , PHONE
+		     , ADDRESS
+		     , AGE
+		     , ENROLL_DATE
+		  FROM TBL_MEMBER
+	</entry>
+
+<entry key="selectedById">
+		SELECT
+		       MEMBER_NO
+		     , MEMBER_ID
+		     , MEMBER_PWD
+		     , MEMBER_NAME
+		     , GENDER
+		     , EMAIL
+		     , PHONE
+		     , ADDRESS
+		     , AGE
+		     , ENROLL_DATE
+		  FROM TBL_MEMBER
+		 WHERE MEMBER_ID = ?
+	</entry>
+<entry key="selectedByGender">
+		SELECT
+		       MEMBER_NO
+		     , MEMBER_ID
+		     , MEMBER_PWD
+		     , MEMBER_NAME
+		     , GENDER
+		     , EMAIL
+		     , PHONE
+		     , ADDRESS
+		     , AGE
+		     , ENROLL_DATE
+		  FROM TBL_MEMBER
+		 WHERE GENDER = ?
+	</entry>
+
 </properties>
