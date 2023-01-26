@@ -76,6 +76,71 @@ public class MemberService {
 		return memberList;
 	}
 
+	public int modifyPassword(String memberId, String password) {
+		Connection conn = getConnection();
+		
+		int result = memberDAO.updatePassword(conn, memberId, password);
+		
+		if(result > 0 ) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
+
+	public int modifyEmail(String memberId, String email) {
+		Connection conn = getConnection();
+		
+		int result = memberDAO.updateEmail(conn, memberId, email);
+		
+		if(result > 0 ) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int modifyPhone(String memberId, String phone) {
+		
+		Connection conn = getConnection();
+		
+		int result = memberDAO.updatePhone(conn, memberId, phone);
+		
+		if(result > 0 ) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int modifyAddress(String memberId, String address) {
+		
+		Connection conn = getConnection();
+		
+		int result = memberDAO.updateAddress(conn, memberId, address);
+		
+		if(result > 0 ) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteMember(String memberId) {
+		
+		Connection conn = getConnection();
+		
+		int result = memberDAO.deleteMember(conn, memberId);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+	}
+
 	
 	
 

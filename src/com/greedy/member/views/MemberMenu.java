@@ -97,7 +97,7 @@ public class MemberMenu {
 		System.out.print("조회할 성별 입력(남:M/여:F) : ");
 		sc.nextLine();
 		
-		return sc.nextLine().toLowerCase();
+		return sc.nextLine().toUpperCase();
 	}
 	
 	public String inputPassword() {

@@ -45,7 +45,7 @@
 		     , AGE
 		     , ENROLL_DATE
 		  FROM TBL_MEMBER
-		 WHERE GENDER = ?
+		 WHERE GENDER = UPPER(?)
 	</entry>
 
 <entry key="insertMember">
@@ -76,6 +76,35 @@
 	   , SYSDATE
 	   )		
 	</entry>
+	
+<entry key="updatePassword">
+       UPDATE TBL_MEMBER
+          SET MEMBER_PWD = ?
+        WHERE MEMBER_ID = ?
+</entry>
 
+<entry key="updateEmail">
+       UPDATE TBL_MEMBER
+          SET EMAIL = ?
+        WHERE MEMBER_ID = ?
+</entry>
+
+<entry key="updatePhone">
+       UPDATE TBL_MEMBER
+          SET PHONE = ?
+        WHERE MEMBER_ID = ?
+</entry>
+
+<entry key="updateAddress">
+       UPDATE TBL_MEMBER
+          SET ADDRESS = ?
+        WHERE MEMBER_ID = ?
+</entry>
+
+<entry key="deleteMember">
+       DELETE
+         FROM TBL_MEMBER
+        WHERE MEMBER_ID = ?
+</entry>
 
 </properties>

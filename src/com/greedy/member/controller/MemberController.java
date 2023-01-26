@@ -96,21 +96,40 @@ public class MemberController {
 
 	/* 입력받은 아이디와 일치하는 회원의 이메일 변경 */
 	public void modifyEmail(String memberId, String email) {
-
+		
+		int result = memberService.modifyEmail(memberId, email);
+		
+		if(result > 0) memberResultView.displayDmlResult("updateSuccess");
+		else memberResultView.displayDmlResult("updateFailed");
 	}
 
 	/* 입력받은 아이디와 일치하는 회원의 전화번호 변경 */
 	public void modifyPhone(String memberId, String phone) {
+		
+		int result = memberService.modifyPhone(memberId, phone);
+		
+		if(result > 0) memberResultView.displayDmlResult("updateSuccess");
+		else memberResultView.displayDmlResult("updateFailed");
 
 	}
 
 	/* 입력받은 아이디와 일치하는 회원의 주소 변경 */
 	public void modifyAddress(String memberId, String address) {
+		
+		int result = memberService.modifyAddress(memberId, address);
+		
+		if(result > 0) memberResultView.displayDmlResult("updateSuccess");
+		else memberResultView.displayDmlResult("updateFailed");
 
 	}
 
 	/* 회원 정보 삭제용 메소드 */
 	public void deleteMember(String memberId) {
+		
+		int result = memberService.deleteMember(memberId);
+		
+		if(result > 0) memberResultView.displayDmlResult("deleteSuccess");
+		else memberResultView.displayDmlResult("deleteFailed");
 
 	}
 
