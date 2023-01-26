@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.greedy.member.model.dto.MemberDTO;
@@ -141,6 +142,13 @@ public class MemberDAO {
 		} catch (IOException | SQLException e1) {
 			e1.printStackTrace();
 		} 
+
+	}
+	
+	/*멤버 등록 메소드*/
+	public void registNewMember(Map<String, String> requestMap) {
+
+		/* Map으로 전달 된 데이터를 꺼내 MemberDTO에 담아 Service로 전달 */
 
 	}
 

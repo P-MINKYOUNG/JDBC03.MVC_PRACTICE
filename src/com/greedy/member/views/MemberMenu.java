@@ -62,6 +62,8 @@ public class MemberMenu {
 		
 		/* 여기서는 사용자의 입력을 받아 맵에 넣는 것을 하면 됩니다. */
 		
+		map.put(null, null);
+		
 		
 		
 		return map;
