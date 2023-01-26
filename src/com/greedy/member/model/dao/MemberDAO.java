@@ -1,8 +1,5 @@
 package com.greedy.member.model.dao;
 
-import static com.greedy.common.JDBCTemplate.close;
-import static com.greedy.common.JDBCTemplate.getConnection;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -22,13 +19,10 @@ public class MemberDAO {
 	Properties prop = null;
 	ResultSet rset = null;
 	PreparedStatement pstmt = null;
-	Connection conn = getConnection();
 	List<MemberDTO> memberList = null;
 	
 	/*전체 멤버 조회하는 메소드*/
-	public void selectAllMembers() {
-
-		Connection conn = getConnection();
+	public void selectAllMembers(Connection conn) {
 
 		try {
 			prop = new Properties();
@@ -67,9 +61,8 @@ public class MemberDAO {
 
 
 	/*ID로 멤버 조회하는 메소드*/
-	public void searchMemberById(String id) {
-
-		
+	public void searchMemberById(Connection conn , String id) {
+	
 		try {
 			prop = new Properties();
 			prop.loadFromXML(new FileInputStream("mapper/member-query.xml"));
@@ -102,7 +95,7 @@ public class MemberDAO {
 	}
 	
 	/*성별로 멤버 조회하는 메소드*/
-	public void searchMemberByGender(String gender) {
+	public void searchMemberByGender(Connection conn, String gender) {
 		
 		
 		try {
@@ -146,9 +139,11 @@ public class MemberDAO {
 	}
 	
 	/*멤버 등록 메소드*/
-	public void registNewMember(Map<String, String> requestMap) {
-
-		/* Map으로 전달 된 데이터를 꺼내 MemberDTO에 담아 Service로 전달 */
+	public void registNewMember(Connection conn, MemberDTO memberDTO) {
+		
+		
+		
+		
 
 	}
 

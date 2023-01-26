@@ -31,6 +31,7 @@
 		  FROM TBL_MEMBER
 		 WHERE MEMBER_ID = ?
 	</entry>
+	
 <entry key="selectedByGender">
 		SELECT
 		       MEMBER_NO
@@ -46,5 +47,6 @@
 		  FROM TBL_MEMBER
 		 WHERE GENDER = ?
 	</entry>
+
 
 </properties>

@@ -32,33 +32,42 @@ public class MemberController {
 
 	private MemberResultView memberResultView = new MemberResultView();
 	private MemberService memberService = new MemberService();
-	private MemberDAO member = new MemberDAO();
+	private MemberDAO memberDAO = new MemberDAO();
 
 	/* 신규 회원 등록용 메소드 */
 	public void registNewMember(Map<String, String> requestMap) {
 
 		/* Map으로 전달 된 데이터를 꺼내 MemberDTO에 담아 Service로 전달 */
+		MemberDTO memberDTO = new MemberDTO();
+		
+		memberDTO.setMemberId(requestMap.get("id"));
+		memberDTO.setMemberPwd(requestMap.get("password"));
+		memberDTO.setMemberName(requestMap.get("name"));
+		memberDTO.setGender(requestMap.get("gender"));
+		memberDTO.setEmail(requestMap.get("email"));
+		
+		memberService.registNewMember(memberDTO);
 
 	}
 
 	/* 모든 회원 정보 조회용 메소드(List로 조회할 것) */
 	public void selectAllMembers() {
 		
-		member.selectAllMembers();
+		memberService.selectAllMembers();
 	
 	}
 
 	/* 아이디를 이용한 회원 정보 검색(MemberDTO로 한 명 회원 정보 조회) */
 	public void searchMemberById(String id) {
 
-		member.searchMemberById(id);
+		memberService.searchMemberById(id);
 
 	}
 
 	/* 성별을 이용한 회원 정보 검색 (List로 조회할 것) */
 	public void searchMemberByGender(String gender) {
 		
-		member.searchMemberByGender(gender);
+		memberService.searchMemberByGender(gender);
 
 	}
 
