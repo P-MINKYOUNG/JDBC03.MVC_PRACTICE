@@ -20,20 +20,19 @@ public class MemberResultView {
 			case "deleteSuccess" : System.out.println("insert 성공!"); break;
 			default : System.out.println("알 수 없는 에러 발생!"); break;
 		}
-		
 	}
 	
 	public void display(List<MemberDTO> list) {
 		
 		for(MemberDTO m : list) {
-			System.out.println(m);
+			System.out.println(m.toString());
 		}
 		
 	}
 	
 	public void display(MemberDTO m) {
 		
-		System.out.println(m);
+		System.out.println(m.toString());
 	}
 	
 }

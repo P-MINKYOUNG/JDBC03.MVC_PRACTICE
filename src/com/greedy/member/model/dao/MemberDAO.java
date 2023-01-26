@@ -1,5 +1,7 @@
 package com.greedy.member.model.dao;
 
+import static com.greedy.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -22,7 +24,7 @@ public class MemberDAO {
 	List<MemberDTO> memberList = null;
 	
 	/*전체 멤버 조회하는 메소드*/
-	public void selectAllMembers(Connection conn) {
+	public List<MemberDTO> selectAllMembers(Connection conn) {
 
 		try {
 			prop = new Properties();
@@ -33,6 +35,8 @@ public class MemberDAO {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 
+			memberList = new ArrayList<>();
+			
 			while (rset.next()) {
 				MemberDTO member = new MemberDTO();
 
@@ -50,18 +54,19 @@ public class MemberDAO {
 				memberList.add(member);
 			}
 
-			for (MemberDTO member : memberList) {
-				System.out.println(member.toString());
-			}
-
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
 		}
+		
+		return memberList;
 	}
 
 
 	/*ID로 멤버 조회하는 메소드*/
-	public void searchMemberById(Connection conn , String id) {
+	public MemberDTO searchMemberById(Connection conn , String id) {
 	
 		try {
 			prop = new Properties();
@@ -75,6 +80,7 @@ public class MemberDAO {
 
 			if (rset.next()) {
 				member = new MemberDTO();
+				
 				member.setMemberNo(rset.getInt("MEMBER_NO"));
 				member.setMemberId(rset.getString("MEMBER_ID"));
 				member.setMemberPwd(rset.getString("MEMBER_PWD"));
@@ -85,17 +91,22 @@ public class MemberDAO {
 				member.setAddress(rset.getString("ADDRESS"));
 				member.setAge(rset.getInt("AGE"));
 				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
-				
-				System.out.println(member.toString());
 			}
 
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();
-		} 
+		} finally{
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return member; 
+		
 	}
 	
 	/*성별로 멤버 조회하는 메소드*/
-	public void searchMemberByGender(Connection conn, String gender) {
+	public List<MemberDTO> searchMemberByGender(Connection conn, String gender) {
 		
 		
 		try {
@@ -128,23 +139,47 @@ public class MemberDAO {
 				memberList.add(member);
 			}
 			
-			for(MemberDTO member : memberList) {
-				System.out.println(member.toString());
-			}
-			
 		} catch (IOException | SQLException e1) {
 			e1.printStackTrace();
-		} 
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return memberList; 
 
 	}
 	
 	/*멤버 등록 메소드*/
-	public void registNewMember(Connection conn, MemberDTO memberDTO) {
+	public int registNewMember(Connection conn, MemberDTO memberDTO) {
 		
+		int result = 0;
 		
+		try {
+			prop = new Properties();
+			prop.loadFromXML(new FileInputStream("mapper/member-query.xml"));
+			
+			String query = prop.getProperty("insertMember");
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberDTO.getMemberId());
+			pstmt.setString(2, memberDTO.getMemberPwd());
+			pstmt.setString(3, memberDTO.getMemberName());
+			pstmt.setString(4, memberDTO.getGender());
+			pstmt.setString(5, memberDTO.getEmail());
+			pstmt.setString(6, memberDTO.getPhone());
+			pstmt.setString(7, memberDTO.getAddress());
+			pstmt.setInt(8, memberDTO.getAge());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (IOException | SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		
-		
-
+		return result;
 	}
 
 

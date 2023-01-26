@@ -48,5 +48,34 @@
 		 WHERE GENDER = ?
 	</entry>
 
+<entry key="insertMember">
+	   INSERT INTO TBL_MEMBER
+	   (
+	     MEMBER_NO
+	   , MEMBER_ID
+	   , MEMBER_PWD
+	   , MEMBER_NAME
+	   , GENDER
+	   , EMAIL
+	   , PHONE
+	   , ADDRESS
+	   , AGE
+	   , ENROLL_DATE
+	   )
+	   VALUES
+	   (
+	     SEQ_MEMBER_NO.NEXTVAL
+	   , ?
+	   , ?
+	   , ?
+	   , ?
+	   , ?
+	   , ?
+	   , ?
+	   , ?
+	   , SYSDATE
+	   )		
+	</entry>
+
 
 </properties>

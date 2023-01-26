@@ -1,11 +1,15 @@
 package com.greedy.member.model.service;
 
-import static com.greedy.common.JDBCTemplate.*;
+import static com.greedy.common.JDBCTemplate.close;
+import static com.greedy.common.JDBCTemplate.getConnection;
+import static com.greedy.common.JDBCTemplate.commit;
+import static com.greedy.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.greedy.member.model.dao.MemberDAO;
@@ -19,50 +23,60 @@ public class MemberService {
 	MemberDAO memberDAO = new MemberDAO();
 	
 	/*회원 등록*/
-	
-	/*모든 멤버 조회*/
-	public void selectAllMembers() {
+	public int registNewMember(MemberDTO memberDTO) {
 		
 		Connection conn = getConnection();
 		
-		memberDAO.selectAllMembers(conn);
+		int result = memberDAO.registNewMember(conn, memberDTO);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		return result;
+		
+	}
+
+	/*모든 멤버 조회*/
+	public List<MemberDTO> selectAllMembers() {
+		
+		Connection conn = getConnection();
+		
+		List<MemberDTO> memberList = new ArrayList<>();
+				
+		memberList = memberDAO.selectAllMembers(conn);
 		
 		close(conn);
-		close(pstmt);
-		close(rset);
+		
+		return memberList;
 	}
 
 	/*ID로 멤버 조회*/
-	public void searchMemberById(String id) {
+	public MemberDTO searchMemberById(String id) {
 		
 		Connection conn = getConnection();
 		
-		memberDAO.searchMemberById(conn, id);
+		MemberDTO memberDTO = memberDAO.searchMemberById(conn, id);
 		
 		close(conn);
-		close(pstmt);
-		close(rset);
+		
+		return memberDTO;
 	}
 
 	/*성별로 멤버 조회*/
-	public void searchMemberByGender(String gender) {
+	public List<MemberDTO> searchMemberByGender(String gender) {
 		
 		Connection conn = getConnection();
 		
-		memberDAO.searchMemberByGender(conn, gender);
+		List<MemberDTO> memberList = new ArrayList<>();
+		
+		memberList = memberDAO.searchMemberByGender(conn, gender);
 		
 		close(conn);
-		close(pstmt);
-		close(rset);
+
+		return memberList;
 	}
 
-	public void registNewMember(MemberDTO memberDTO) {
-		
-		Connection conn = getConnection();
-		
-		memberDAO.registNewMember(conn, memberDTO);
-		
-	}
+	
 	
 
 	

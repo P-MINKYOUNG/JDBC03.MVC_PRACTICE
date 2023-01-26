@@ -62,29 +62,31 @@ public class MemberMenu {
 		
 		/* 여기서는 사용자의 입력을 받아 맵에 넣는 것을 하면 됩니다. */
 		
+		sc.nextLine();
 		System.out.print("아이디를 입력해주세요 : ");
 		String id = sc.nextLine();
-		map.put("id", id);
 		System.out.print("비밀번호를 입력해주세요 : ");
 		String pwd = sc.nextLine();
-		map.put("password", pwd);
 		System.out.print("성함을 입력해주세요 : ");
 		String name = sc.nextLine();
-		map.put("name", name);
 		System.out.print("성별을 입력해주세요 : ");
 		String gender = sc.nextLine();
-		map.put("gender", gender);
 		System.out.print("이메일을 입력해주세요 : ");
 		String email = sc.nextLine();
-		map.put("email", email);
 		System.out.print("휴대폰 번호를 입력해주세요 : ");
 		String phone = sc.nextLine();
-		map.put("phone", phone);
 		System.out.print("주소를 입력해주세요 : ");
 		String address = sc.nextLine();
-		map.put("address", address);
 		System.out.print("나이를 입력해주세요 : ");
 		int age = sc.nextInt();
+		
+		map.put("id", id);
+		map.put("password", pwd);
+		map.put("name", name);
+		map.put("gender", gender);
+		map.put("email", email);
+		map.put("phone", phone);
+		map.put("address", address);
 		map.put("age", Integer.toString(age));
 		
 		return map;

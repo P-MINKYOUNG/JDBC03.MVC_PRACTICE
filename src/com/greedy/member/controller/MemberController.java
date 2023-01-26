@@ -45,35 +45,53 @@ public class MemberController {
 		memberDTO.setMemberName(requestMap.get("name"));
 		memberDTO.setGender(requestMap.get("gender"));
 		memberDTO.setEmail(requestMap.get("email"));
+		memberDTO.setPhone(requestMap.get("phone"));
+		memberDTO.setAddress(requestMap.get("address"));
+		memberDTO.setAge(Integer.parseInt(requestMap.get("age")));
 		
-		memberService.registNewMember(memberDTO);
+		int result = memberService.registNewMember(memberDTO);
+		
+		if(result > 0) memberResultView.displayDmlResult("insertSuccess");
+		else memberResultView.displayDmlResult("insertFailed");
 
 	}
 
 	/* 모든 회원 정보 조회용 메소드(List로 조회할 것) */
 	public void selectAllMembers() {
 		
-		memberService.selectAllMembers();
+		List<MemberDTO> memberList = memberService.selectAllMembers();
+		
+		if(memberList != null) memberResultView.display(memberList);
+		else memberResultView.displayDmlResult("selectFailed");
 	
 	}
 
 	/* 아이디를 이용한 회원 정보 검색(MemberDTO로 한 명 회원 정보 조회) */
 	public void searchMemberById(String id) {
 
-		memberService.searchMemberById(id);
+		MemberDTO memberDTO = memberService.searchMemberById(id);
+		
+		if(memberDTO != null) memberResultView.display(memberDTO);
+		else memberResultView.displayDmlResult("selectFailed");
 
 	}
 
 	/* 성별을 이용한 회원 정보 검색 (List로 조회할 것) */
 	public void searchMemberByGender(String gender) {
 		
-		memberService.searchMemberByGender(gender);
-
+		List<MemberDTO> memberList = memberService.searchMemberByGender(gender);
+		
+		if(memberList != null) memberResultView.display(memberList);
+		else memberResultView.displayDmlResult("selectFailed");
 	}
 
 	/* 입력받은 아이디와 일치하는 회원의 비밀번호 변경 */
 	public void modifyPassword(String memberId, String password) {
-
+		
+		int result = memberService.modifyPassword(memberId, password);
+		
+		if(result > 0) memberResultView.displayDmlResult("updateSuccess");
+		else memberResultView.displayDmlResult("updateFailed");
 	}
 
 	/* 입력받은 아이디와 일치하는 회원의 이메일 변경 */
